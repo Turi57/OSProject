@@ -2,7 +2,3 @@ Contribuidores:
   Claudia King
   Fernando Cortez
   Victor Peralta
-  
-Primer archivo
-Segunda Línea
-Tercera Línea
