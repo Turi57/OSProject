@@ -14,7 +14,7 @@ def crearOrden(jsonInputString):
     listaSubordenes = []
     for orden in listaOrdenes:
         s = subOrden(orden["part_id"], orden["type"],orden["meat"], orden["quantity"], orden["ingredients"])
-        listSubordenes.append(s)
+        listaSubordenes.append(s)
     return Orden(jsonObject["datetime"], jsonObject["request_id"],listaSubordenes)
 
 ##
@@ -26,7 +26,7 @@ def serializeOrder(ordenObject):
 
 ##
 ## Function that reads all lines of a text file, traducing them to json strings
-## and creating Orden objects 
+## and creating Orden objects
 ##
 def readOrdersFile(fileName):
     with open(fileName, 'r') as f:
