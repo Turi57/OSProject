@@ -1,15 +1,17 @@
 import json
+from Orden import *
 
 jsonSampleString = '{"datetime": "2017-01-01 23:23:23", "request_id": "123-123-123", "orden": [{"part_id": "123-111","type": "taco","meat": "asada","quantity": 3,"ingredients": ["cebolla","salsa"]},{"part_id": "123-222","type": "mulita","meat": "asada","quantity": 1,"ingredients": [  ]}]}'
 
 ##
 ## Function that converts a json string to an Orden object
 ##
+
 def crearOrden(jsonInputString):
-    jsonObject = json.loads(jsonString)
+    jsonObject = json.loads(jsonInputString)
     listOrdenes = jsonObject["orden"]
     listSubordenes = []
-    for orden in listaOrdenes:
+    for orden in listOrdenes:
         s = subOrden(orden["part_id"], orden["type"],orden["meat"], orden["quantity"], orden["ingredients"])
         listSubordenes.append(s)
     return Orden(jsonObject["datetime"], jsonObject["request_id"],listSubordenes)
