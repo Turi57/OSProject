@@ -16,8 +16,8 @@ def parseJSON(jsonInputString):
 ##
 ## Function that reads all lines of a text file, converting them to json objects (dictionaries)
 ##
-def readOrdersFile(fileName):
-    with open(fileName, 'r') as f:
+def readOrdersFile():
+    with open(FILENAME, 'r') as f:
         listaOrdenes = []
         while True:
             line = f.readline()
@@ -29,7 +29,7 @@ def readOrdersFile(fileName):
         return listaOrdenes
 
 ###MAIN#####
-requestList = readOrdersFile(FILENAME)
+requestList = readOrdersFile()
 
 
 statistics.printTable(requestList)
