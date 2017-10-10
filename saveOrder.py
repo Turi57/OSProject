@@ -17,5 +17,5 @@ def saveOrder():
     for order in response["Messages"]:
         f.write(order["Body"] + "\n")
         print(order)
-
+    f.close()
 saveOrder()
