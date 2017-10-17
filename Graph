@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt; plt.rcdefaults()
 import matplotlib.pyplot as plt
 import numpy as np
 
-objects = ('Asada\n','Adobada\n', 'Cabeza\n', 'Lengua\n$
+objects = ('Asada\n','Adobada\n', 'Cabeza\n', 'Lengua\n', 'Lengua\n', 'Veggie\n', 'Tripa\n', 'Chorizo\n')
 y_pos = np.arange(len(objects))
 performance = [30,10,8,16,4,2,5]
 
