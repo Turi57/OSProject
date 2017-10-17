@@ -18,4 +18,19 @@ def saveOrder():
         f.write(order["Body"] + "\n")
         print(order)
     f.close()
-saveOrder()
+
+def readSQS():
+    
+    listOrders = []
+    sqs = boto3.client('sqs')
+    response = sqs.receive_message(
+        QueueUrl='https://sqs.us-east-1.amazonaws.com/292274580527/cc406_team3'
+    )
+    
+    if response == None:
+        return None
+    
+    for order in response["Messages"]:
+        listOrders.append(order["Body"])
+    
+    return listOrders
