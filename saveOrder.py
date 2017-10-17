@@ -27,10 +27,8 @@ def readSQS():
         QueueUrl='https://sqs.us-east-1.amazonaws.com/292274580527/cc406_team3'
     )
     
-    if response == None:
-        return None
-    
-    for order in response["Messages"]:
-        listOrders.append(order["Body"])
-    
+    if response != None:
+        for order in response["Messages"]:
+            listOrders.append(order["Body"])
+            
     return listOrders
