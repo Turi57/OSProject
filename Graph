@@ -1,0 +1,14 @@
+import matplotlib.pyplot as plt; plt.rcdefaults()
+import matplotlib.pyplot as plt
+import numpy as np
+
+objects = ('Asada\n','Adobada\n', 'Cabeza\n', 'Lengua\n$
+y_pos = np.arange(len(objects))
+performance = [30,10,8,16,4,2,5]
+
+plt.bar(y_pos, performance, align='center', alpha=0.5)
+plt.xticks(y_pos,objects)
+plt.ylabel('Cantidad de Tacos')
+plt.title('Tacos "El Frank"')
+
+plt.show()
