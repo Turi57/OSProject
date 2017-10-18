@@ -5,14 +5,11 @@ import numpy as np
 import tabulate
 
 def printTable(orderList):
-    orders = []
+    typeCount = {"taco": 0, "quesadilla": 0, "mulita": 0, "tostada": 0, "vampiro": 0}
     for order in orderList:
-        quantity = 0
         for suborder in order["orden"]:
-            quantity += suborder["quantity"]
-        orders.append([order["request_id"], quantity])
-
-    print(tabulate.tabulate(orders, headers=["Request ID", "Quantity"]))
+            typeCount[suborder["type"]] += suborder["quantity"]
+    print(tabulate.tabulate([list(typeCount.keys()), list(typeCount.values())],headers=["Quantity", "Type"]))
 
 def graphBars(listaEtiquetas, listaValores):
     ### Here is the function to graph a list of values with a list of labels
