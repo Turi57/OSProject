@@ -16,7 +16,7 @@ def printTable(orderList):
 
 def graphBars(listaEtiquetas, listaValores):
     ### Here is the function to graph a list of values with a list of labels
-    
+    plt.ion()
     y_pos = np.arange(len(listaEtiquetas))
     plt.bar(y_pos, listaValores, align='center', alpha=0.5)
     plt.xticks(y_pos, listaEtiquetas)
