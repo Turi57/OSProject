@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt; plt.rcdefaults()
 import matplotlib.pyplot as plt
+from jsonOrder import *
 import numpy as np
 import tabulate
 
@@ -23,3 +24,35 @@ def graphBars(listaEtiquetas, listaValores):
     plt.title('Tacos "El Frank"')
     
     plt.show()
+    
+def obtainTacosByType(listaOrdenes):
+    cantidadPorTipo = {"taco":0, "quesadilla":0, "mulita":0, "tostada":0, "vampiro":0}
+    for orden in listaOrdenes:
+        subordenes = orden["orden"]
+        for i in range(len(subordenes)):
+            currentType = subordenes[i]["type"]
+            cantidadPorTipo[currentType] += subordenes[i]["quantity"]
+    return cantidadPorTipo
+
+def graphTacosByType(diccionarioTipos):
+    graphBars(list(diccionarioTipos.keys()), list(diccionarioTipos.values()))
+    
+
+def obtainTacosByMeat(listaOrdenes):
+    cantidadPorCarne = {"asada":0, "adobada":0, "cabeza":0, "lengua":0, "suadero":0, "veggie":0, "tripa":0}
+    for orden in listaOrdenes:
+        subordenes = orden["orden"]
+        for i in range(len(subordenes)):
+            currentMeat = subordenes[i]["meat"]
+            cantidadPorCarne[currentMeat] += subordenes[i]["quantity"]
+    return cantidadPorCarne
+
+def graphTacosByMeat(diccionarioCarnes):
+    graphBars(list(diccionarioCarnes.keys()), list(diccionarioCarnes.values()))
+
+listaOrdenes = readOrdersFile()
+tipos = obtainTacosByType(listaOrdenes)
+carnes = obtainTacosByMeat(listaOrdenes)
+
+graphTacosByType(tipos)
+graphTacosByMeat(carnes)
