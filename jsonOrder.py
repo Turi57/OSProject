@@ -20,8 +20,8 @@ def readOrdersFile():
         return listaOrdenes
 
 ###MAIN#####
-requestList = readOrdersFile()
+#requestList = readOrdersFile()
 
 
-statistics.printTable(requestList)
+#statistics.printTable(requestList)
 
