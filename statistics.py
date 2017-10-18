@@ -50,9 +50,9 @@ def obtainTacosByMeat(listaOrdenes):
 def graphTacosByMeat(diccionarioCarnes):
     graphBars(list(diccionarioCarnes.keys()), list(diccionarioCarnes.values()))
 
-listaOrdenes = readOrdersFile()
-tipos = obtainTacosByType(listaOrdenes)
-carnes = obtainTacosByMeat(listaOrdenes)
+#listaOrdenes = readOrdersFile()
+#tipos = obtainTacosByType(listaOrdenes)
+#carnes = obtainTacosByMeat(listaOrdenes)
 
-graphTacosByType(tipos)
-graphTacosByMeat(carnes)
+#graphTacosByType(tipos)
+#graphTacosByMeat(carnes)
