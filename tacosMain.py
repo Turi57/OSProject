@@ -19,3 +19,6 @@ carnes = obtainTacosByMeat(listaOrdenes)
 
 graphTacosByType(tipos)
 graphTacosByMeat(carnes)
+
+#Wait to see the graphs
+input("")
