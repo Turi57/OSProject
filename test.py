@@ -5,7 +5,7 @@ from statistics import *
 ##### MAIN #####
 
 # Read from orders.json and store the json strings in a list
-listaOrdenes = readOrdersFile;
+listaOrdenes = readOrdersFile();
 
 # Print a table of the current orders and their details
 printTable(listaOrdenes)
