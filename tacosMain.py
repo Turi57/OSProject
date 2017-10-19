@@ -17,8 +17,8 @@ printTable(listaOrdenes)
 tipos = obtainTacosByType(listaOrdenes)
 carnes = obtainTacosByMeat(listaOrdenes)
 
-graphTacosByType(tipos)
-graphTacosByMeat(carnes)
+graphTacos(tipos, "Tipos")
+graphTacos(carnes, "Carnes")
 
 #Wait to see the graphs
 input("")
