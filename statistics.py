@@ -11,12 +11,13 @@ def printTable(orderList):
             typeCount[suborder["type"]] += suborder["quantity"]
     print(tabulate.tabulate([list(typeCount.keys()), list(typeCount.values())],headers=["Quantity", "Type"]))
 
-def graphBars(listaEtiquetas, listaValores):
+def graphBars(listaEtiquetas, listaValores, titulo):
     ### Here is the function to graph a list of values with a list of labels
     plt.ion()
     y_pos = np.arange(len(listaEtiquetas))
 
     plt.figure()
+    plt.title(titulo)
     plt.xticks(y_pos, listaEtiquetas)
     plt.bar(y_pos, listaValores, align='center', alpha=0.5)
     
@@ -29,10 +30,6 @@ def obtainTacosByType(listaOrdenes):
             cantidadPorTipo[currentType] += subordenes[i]["quantity"]
     return cantidadPorTipo
 
-def graphTacosByType(diccionarioTipos):
-    graphBars(list(diccionarioTipos.keys()), list(diccionarioTipos.values()))
-    
-
 def obtainTacosByMeat(listaOrdenes):
     cantidadPorCarne = {"asada":0, "adobada":0, "cabeza":0, "lengua":0, "suadero":0, "veggie":0, "tripa":0}
     for orden in listaOrdenes:
@@ -42,12 +39,15 @@ def obtainTacosByMeat(listaOrdenes):
             cantidadPorCarne[currentMeat] += subordenes[i]["quantity"]
     return cantidadPorCarne
 
-def graphTacosByMeat(diccionarioCarnes):
-    graphBars(list(diccionarioCarnes.keys()), list(diccionarioCarnes.values()))
+#Function to send directly a dictionary as a list of labels and values
+def graphTacos(diccionario, titulo):
+    graphBars(list(diccionario.keys()), list(diccionario.values()), titulo)
+    
 
+##TESTINT####
 #listaOrdenes = readOrdersFile()
 #tipos = obtainTacosByType(listaOrdenes)
 #carnes = obtainTacosByMeat(listaOrdenes)
 
-#graphTacosByType(tipos)
-#graphTacosByMeat(carnes)
+#graphBars(tipos, "Tipos de taco")
+#graphBars(carnes, "Tipos de carne")
