@@ -49,5 +49,5 @@ def graphTacos(diccionario, titulo):
 #tipos = obtainTacosByType(listaOrdenes)
 #carnes = obtainTacosByMeat(listaOrdenes)
 
-#graphBars(tipos, "Tipos de taco")
-#graphBars(carnes, "Tipos de carne")
+#graphTacos(tipos, "Tipos de taco")
+#graphTacos(carnes, "Tipos de carne")
