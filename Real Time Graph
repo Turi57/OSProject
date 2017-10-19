@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import numpy as np
+
 count = 100
 fig, ax = plt.subplots()
 line, = ax.plot([],[])
@@ -8,17 +9,21 @@ ax.set_ylim([-5,5])
 ax.set_xlim(0,count)
 xdata = []
 ydata = []
+
 def next():
         i = 0
         while i <= count:
                 i += 1
                 yield 1
+                
 def update(i):
         xdata.append(i)
         y = np.sin(i/10.)
         ydata.append(y)
         line.set_data(xdata,ydata)
         return line,
+        
 if __name__ == '__main__':
         a = animation.FuncAnimation(fig, update, next, blit=False,$
+        plt.title('Tacos "El Franc"')
         plt.show()
