@@ -74,7 +74,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Victor Peralta** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Victor Peralta** - *Initial work* - [VictorPeralta](https://github.com/VictorPeralta)
 
 * **Fernando Cortez** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
 
