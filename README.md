@@ -51,7 +51,9 @@ Explain what these tests test and why
 ```
 Give an example
 ```
+#Image Example
 
+![picture alt](http://www.brightlightpictures.com/assets/images/portfolio/thethaw_header.jpg "Title is optional")
 ## Deployment
 
 Add additional notes about how to deploy this on a live system
