@@ -5,7 +5,7 @@ import numpy as np
 import tabulate
 
 def printTable(orderList):
-    typeCount = {"taco": 0, "quesadilla": 0, "mulita": 0, "tostada": 0, "vampiro": 0}
+    typeCount = {"Taco": 0, "Quesadilla": 0, "Mulita": 0, "Tostada": 0, "Vampiro": 0}
     for order in orderList:
         for suborder in order["orden"]:
             typeCount[suborder["type"]] += suborder["quantity"]
@@ -22,7 +22,7 @@ def graphBars(listaEtiquetas, listaValores, titulo):
     plt.bar(y_pos, listaValores, align='center', alpha=0.5)
     
 def obtainTacosByType(listaOrdenes):
-    cantidadPorTipo = {"taco":0, "quesadilla":0, "mulita":0, "tostada":0, "vampiro":0}
+    cantidadPorTipo = {"Taco": 0, "Quesadilla": 0, "Mulita": 0, "Tostada": 0, "Vampiro": 0}
     for orden in listaOrdenes:
         subordenes = orden["orden"]
         for i in range(len(subordenes)):
@@ -31,7 +31,7 @@ def obtainTacosByType(listaOrdenes):
     return cantidadPorTipo
 
 def obtainTacosByMeat(listaOrdenes):
-    cantidadPorCarne = {"asada":0, "adobada":0, "cabeza":0, "lengua":0, "suadero":0, "veggie":0, "tripa":0}
+    cantidadPorCarne = {"Asada":0, "Adobada":0, "Cabeza":0, "Lengua":0, "Suadero":0, "Veggie":0, "Tripa":0}
     for orden in listaOrdenes:
         subordenes = orden["orden"]
         for i in range(len(subordenes)):

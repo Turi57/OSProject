@@ -2,7 +2,6 @@ import boto3
 import json
 
 def saveOrder():
-
     f = open("orders.json", 'a')
     sqs = boto3.client('sqs')
     response = sqs.receive_message(
@@ -21,7 +20,6 @@ def saveOrder():
     f.close()
 
 def readSQS():
-    
     listOrders = []
     sqs = boto3.client('sqs')
     response = sqs.receive_message(
