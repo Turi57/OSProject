@@ -8,8 +8,10 @@ from statistics import *
 listaOrdenes = readSQS();
 
 # Read orders.json and create a list with all orders as json objects (dictionaries)
-#listaOrdenes = readOrdersFile()
+listaOrdenes2 = readOrdersFile()
 
+print(listaOrdenes)
+print(listaOrdenes2)
 # Print a table of the current orders and their details
 printTable(listaOrdenes)
 

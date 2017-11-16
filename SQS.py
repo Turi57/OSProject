@@ -1,4 +1,5 @@
 import boto3
+import json
 
 def saveOrder():
 
@@ -26,11 +27,11 @@ def readSQS():
     response = sqs.receive_message(
         QueueUrl='https://sqs.us-east-1.amazonaws.com/292274580527/cc406_team3'
     )
-    
+
     if response != None:
         for order in response["Messages"]:
-            listOrders.append(order["Body"])
-            
+            listOrders.append(json.loads(order["Body"]))
+
     return listOrders
 
 def putSQS(message):
