@@ -1,5 +1,5 @@
 from jsonOrder import *
-from saveOrder import *
+from SQS import *
 from statistics import *
 
 ##### MAIN #####
