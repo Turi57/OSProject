@@ -74,7 +74,12 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Victor Peralta** - *Initial work* - [VictorPeralta](https://github.com/VictorPeralta)
+
+* **Fernando Cortez** - *Initial work* - [fernandoraulcortezchavez](https://github.com/fernandoraulcortezchavez)
+
+* **Claudia King** - *Initial work* - [mking20](https://github.com/mking20)
+
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 

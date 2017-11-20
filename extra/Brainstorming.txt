@@ -1,0 +1,9 @@
+--------TAQUEROS:
+Taquero 1: Asada, Cabeza 
+Taquero 2: Adobada, Lengua
+Taquero 3: 
+
+--------Algoritmo:
+
+
+
