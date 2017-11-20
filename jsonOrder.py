@@ -19,12 +19,12 @@ def readOrdersFile():
                 break
         return listaOrdenes
     
-"""Function that receives the string from SQS parsed to JSON object, and will add the answer's attributes """"
+"""Function that receives the string from SQS parsed to JSON object, and will add the answer's attributes """
 def initializeResponse(inputJSON):
     pass
 
 """Function that receives a response JSON object, a string that describes the step´s state and
-another one that describes the action done.""""
+another one that describes the action done."""
 def addStepToAnswer(responseJSON, stateString, actionString):
     pass
 
