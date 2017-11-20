@@ -1,7 +1,7 @@
 --------TAQUEROS:
-Taquero 1: Asada, Cabeza 
+Taquero 1: Asada, Tripa
 Taquero 2: Adobada, Lengua
-Taquero 3: 
+Taquero 3: Suadero, Cabeza, Veggie
 
 --------Algoritmo:
 
