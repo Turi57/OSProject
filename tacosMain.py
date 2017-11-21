@@ -5,13 +5,14 @@ from statistics import *
 ##### MAIN #####
 
 # Read from SQS and store the json strings in a list
-listaOrdenes = readSQS();
+listaOrdenes = []
+listaOrdenes.extend(readSQS())
 
 # Read orders.json and create a list with all orders as json objects (dictionaries)
-listaOrdenes2 = readOrdersFile()
+# listaOrdenes2 = readOrdersFile()
 
 print(listaOrdenes)
-print(listaOrdenes2)
+# print(listaOrdenes2)
 # Print a table of the current orders and their details
 printTable(listaOrdenes)
 
