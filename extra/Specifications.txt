@@ -1,0 +1,79 @@
+Cada taquero tiene su propia hada de los sueños (tortillera).
+5 Graficas. Ejemplos:
+Tiempo por tipo (Taco, Quesadilla)
+Tiempo por carne.
+Tiempo por tamaño de orden.
+Ciclos.
+Prioridades.
+Solo tres taqueros y cada equipo decide que hace cada taquero.
+Ingredientes ilimitados pero se tiene que hacer "Refill" de lo disponible. Si se hace refill secuencial entonces tiene que tener un thread.sleep/time.sleep. La otra opcion es hacer refill en paralelo (otro thread)
+Proceso:
+Leer de Team Queue (SQS)
+Procesar Mensaje (Core del Proyecto)
+Escribir en Renspose Queue (SQS)
+Borrar de Team Queue (SQS) usando Receipt
+La orden puede tener de 1 a 10 partes (sub ordenes)
+Valores de todos los ingredientes iniciales es 500. Cada taco necesita 1 unidades de cada ingrediente.
+Todo el equipo debe ser capaz de describir el algoritmo de scheduling y tiene que estar representado en un diagrama (README).
+Dependiendo del algoritmo implementado se deben poder hacer modificaciones a la configuracion y comparar su efecto. E.g. Atender a dos clientes al mismo tiempo vs atender a 5 clientes al mismo tiempo.
+Descripcion del comportamiento de su algoritmo (README).
+La calificacion por default es 80 (Siempre y cuando sea original y sea algo).
+El queue de lectura es: https://sqs.us-east-1.amazonaws.com/292274580527/cc406_team4 y el de escritura: https://sqs.us-east-1.amazonaws.com/292274580527/cc406_response4 (Donde 4 es el numero de equipo. Cada equipo tiene su propio queue de lectura y su propio queue de escritura)
+Examen Final: Lunes 27 de Noviembre a las 8pm Salon 4302
+Entrega de Proyecto Final: Miercoles 29 de Noviembre a las 8pm Salon 4302 
+Formato de JSON:
+{  
+   "datetime":"2017-01-01 23:23:23",
+   "request_id":"123-123-123",
+   "orden":[  
+      {  
+         "part_id":"123-111",
+         "type":"taco",
+         "meat":"asada",
+         "quantity":3,
+         "ingredients":[  
+            "cebolla",
+            "salsa"
+         ]
+      },
+      {  
+         "part_id":"123-222",
+         "type":"mulita",
+         "meat":"asada",
+         "quantity":1,
+         "ingredients":[  
+
+         ]
+      }
+   ],
+   "answer":{  
+      "start_time":"",
+      "end_date":"",
+      "steps":[  
+         {  
+            "step":1,
+            "state":"running",
+            "action":"working on orden",
+            "part_id":"123-123",
+            "startTime":"",
+            "endTime":""
+         },
+         {  
+            "step":2,
+            "state":"suspend",
+            "action":"waiting for cheese",
+            "part_id":"123-222",
+            "start_time":"",
+            "end_date":""
+         },
+         {  
+            "step":3,
+            "state":"running",
+            "action":"working on orden",
+            "part_id":"123-222",
+            "start_time":"",
+            "end_date":""
+         }
+      ]
+   }
+}
