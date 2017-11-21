@@ -13,9 +13,25 @@ def rellenarIngredientes(tiempo):
         time.sleep(tiempo)
         ingredientes[min(ingredientes, key=ingredientes.get)] += 50
 
-def mesero():
+def mesero(listaOrdenes):
     """Takes orders and submits them to appropriate queue"""
-    pass
+
+    while True:
+        print("Mesero", len(listaOrdenes))
+        if len(listaOrdenes) > 0:
+            orden = listaOrdenes.pop(0)
+            for suborder in orden["orden"]:
+                meat_type = suborder["meat"]
+                print(meat_type)
+                if meat_type == "Asada" or meat_type == "Tripa":
+                    queue_asada_tripa.put(suborder)
+                elif meat_type == "Adobada" or meat_type == "Lengua":
+                    queue_adobada_lengua.put(suborder)
+                else:
+                    queue_cabeza_suadero_veggie.put(suborder)
+
+
+        time.sleep(1)
 
 def taquero1():
     """Este taquero se encarga de la asada y tripa"""
