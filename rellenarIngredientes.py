@@ -1,7 +1,7 @@
 import time
-diccionarioIngredientes = {"Aguacate":50, "Cebolla":5, "Cilantro":500, "Frijoles":60, "Salsa":300}
+diccionarioIngredientes = {"Guacamole":500, "Cebolla":500, "Cilantro":500, "Frijoles":500, "Salsa":500}
 
-def rellenarIngredientes(diccionarioIngredientes, ingrediente, tiempo):
-    time.sleep(tiempo)
-    diccionarioIngredientes[ingrediente] += 50
-print(diccionarioIngredientes)
+def rellenarIngredientes(tiempo):
+    while True:
+        time.sleep(tiempo)
+        diccionarioIngredientes[min(diccionarioIngredientes, key=diccionarioIngredientes.get)] += 50

@@ -1,6 +1,8 @@
 from jsonOrder import *
 from SQS import *
 from statistics import *
+from rellenarIngredientes import *
+from threading import Thread
 
 ##### MAIN #####
 
@@ -23,5 +25,9 @@ carnes = obtainTacosByMeat(listaOrdenes)
 graphTacos(tipos, "Tipos")
 graphTacos(carnes, "Carnes")
 
-#Wait to see the graphs
-input("")
+t1 = Thread(target=rellenarIngredientes,args=[1])
+t1.start()
+
+
+
+t1.join()
