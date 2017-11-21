@@ -1,7 +1,7 @@
 from jsonOrder import *
 from SQS import *
 from statistics import *
-from rellenarIngredientes import *
+from taqueria import *
 from threading import Thread
 
 ##### MAIN #####
