@@ -25,9 +25,17 @@ carnes = obtainTacosByMeat(listaOrdenes)
 graphTacos(tipos, "Tipos")
 graphTacos(carnes, "Carnes")
 
-t1 = Thread(target=rellenarIngredientes,args=[1])
-t1.start()
+thread_ingredientes = Thread(target=rellenarIngredientes, args=[1])
+thread_ingredientes.start()
+
+thread_mesero = Thread(target=mesero, args=[listaOrdenes])
+thread_mesero.start()
+
+while True:
+    listaOrdenes.extend(readSQS())
+    time.sleep(10)
+
+thread_mesero.join()
+thread_ingredientes.join()
 
 
-
-t1.join()
