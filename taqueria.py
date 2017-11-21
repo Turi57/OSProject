@@ -13,6 +13,10 @@ def rellenarIngredientes(tiempo):
         time.sleep(tiempo)
         ingredientes[min(ingredientes, key=ingredientes.get)] += 50
 
+def mesero():
+    """Takes orders and submits them to appropriate queue"""
+    pass
+
 def taquero1():
     """Este taquero se encarga de la asada y tripa"""
     pass
