@@ -33,14 +33,12 @@ def mesero(listaOrdenes):
 
         time.sleep(1)
 
-def taquero1():
-    """Este taquero se encarga de la asada y tripa"""
-    pass
+def taquero1(orderQueue):
+    """Takes orders from correspoding queue and processes them."""
+    while True:
+        processOrder(orderQueue.get())
+        time.sleep(2)
 
-def taquero2():
-    """Este taquero se encarga de adobada y lengua"""
-    pass
 
-def taquero3():
-    """Este taquero se encarga de cabeza, suadero y veggie"""
+def processOrder(order):
     pass
