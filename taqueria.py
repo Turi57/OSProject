@@ -38,12 +38,24 @@ def mesero(listaOrdenes):
 def taquero1(orderQueue):
     """Takes orders from correspoding queue and processes them."""
     while True:
-        processOrder(orderQueue.get())
+        order = processOrder(orderQueue.get())
+        orderQueue.put(order)
         time.sleep(2)
 
 
 def processOrder(order):
+    """Process order, add steps to response"""
+    for ingrediente in order["ingredients"]:
+        if(ingredientes[ingrediente] < 1):
+            return order
+
     for ingrediente in order["ingredients"]:
         ingredientes[ingrediente] -= 1
 
-    pass
+    if order["quantity"] > 0:
+        order["quantity"] -= 1
+    if order["quantity"] == 0:
+        #DO SOMETHING WITH FINISHED ORDER
+        pass
+
+    return order
