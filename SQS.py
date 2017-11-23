@@ -35,7 +35,7 @@ def readSQS():
 
 def putSQS(message):
     sqs = boto3.resource('sqs')
-    queue = sqs.get_queue_by_name(QueueName='cc406_team3')
+    queue = sqs.get_queue_by_name(QueueName='cc406_response3')
     print(queue.url)
 
     response = queue.send_message(MessageBody=message)
