@@ -51,4 +51,4 @@ pylab.plot(x1, y1, 'bo', label='sampled')
 pylab.plot(x2, y2, ':k', label='continuous')
 pylab.legend()
 
-pylab.ylim(-1.5, 2.0
+pylab.ylim(-1.5, 2.0)
