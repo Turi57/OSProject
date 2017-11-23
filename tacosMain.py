@@ -42,6 +42,6 @@ thread_taquero3.start()
 while True:
     listaOrdenes.extend(readSQS())
     print(listaOrdenes)
-    time.sleep(10)
+    time.sleep(4)
     print(ingredientes)
 

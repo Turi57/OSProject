@@ -24,12 +24,11 @@ def readSQS():
     sqs = boto3.client('sqs')
     response = sqs.receive_message(
         QueueUrl='https://sqs.us-east-1.amazonaws.com/292274580527/cc406_team3',
-        MaxNumberOfMessages=10
+        MaxNumberOfMessages=3
     )
-    print("RESPONSES:")
+
     if response != None:
         for order in response["Messages"]:
-            print(order)
             listOrders.append(json.loads(order["Body"]))
 
     return listOrders

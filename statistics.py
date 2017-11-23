@@ -13,13 +13,12 @@ def printTable(orderList):
 
 def graphBars(listaEtiquetas, listaValores, titulo):
     ### Here is the function to graph a list of values with a list of labels
-    plt.ion()
-    y_pos = np.arange(len(listaEtiquetas))
-
-    plt.figure()
+    plt.bar(listaEtiquetas, listaValores)
+    plt.ylabel("Quantity of items")
     plt.title(titulo)
-    plt.xticks(y_pos, listaEtiquetas)
-    plt.bar(y_pos, listaValores, align='center', alpha=0.5)
+    plt.xlabel("Item type")
+    plt.show()
+
     
 def obtainTacosByType(listaOrdenes):
     cantidadPorTipo = {"Taco": 0, "Quesadilla": 0, "Mulita": 0, "Tostada": 0, "Vampiro": 0}

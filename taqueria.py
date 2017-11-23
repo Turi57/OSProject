@@ -13,6 +13,7 @@ def rellenarIngredientes(tiempo):
         time.sleep(tiempo)
         ingredientes[min(ingredientes, key=ingredientes.get)] += 50
 
+
 def mesero(listaOrdenes):
     """Takes orders and submits them to appropriate queue"""
 
@@ -33,6 +34,7 @@ def mesero(listaOrdenes):
 
         time.sleep(1)
 
+
 def taquero1(orderQueue):
     """Takes orders from correspoding queue and processes them."""
     while True:
@@ -41,4 +43,7 @@ def taquero1(orderQueue):
 
 
 def processOrder(order):
+    for ingrediente in order["ingredients"]:
+        ingredientes[ingrediente] -= 1
+
     pass
