@@ -6,7 +6,9 @@ queue_asada_tripa = queue.Queue()
 queue_adobada_lengua = queue.Queue()
 queue_cabeza_suadero_veggie = queue.Queue()
 
-
+orders_in_progress = {}
+# Orders in progess format
+# {order_id> {suborder_id dict> [done_status, {steps}]}}
 
 def rellenarIngredientes(tiempo):
     while True:
@@ -56,7 +58,9 @@ def processOrder(order):
     if order["quantity"] > 0:
         order["quantity"] -= 1
     if order["quantity"] == 0:
-        #DO SOMETHING WITH FINISHED ORDER
+        #look for pair order, if it is finished too, send response
+
         return [order, True]
 
     return [order, False]
+
