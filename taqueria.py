@@ -59,8 +59,11 @@ def processOrder(order):
         order["quantity"] -= 1
     if order["quantity"] == 0:
         #look for pair order, if it is finished too, send response
-
+        addStep(order, 1)
         return [order, True]
 
     return [order, False]
+
+def addStep(order, step):
+    print(order["part_id"], "part of", order["part_id"][:36])
 
