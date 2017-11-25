@@ -7,35 +7,8 @@ queue_adobada_lengua = queue.Queue()
 queue_cabeza_suadero_veggie = queue.Queue()
 
 orders_in_progress = {}
-# Orders in progess format
-# {order_id> {suborder_id dict> [done_status, start, end, {steps}]}}
+# Orders in progess format, see order_in_proges_format.txt in extras
 
-# {
-#   "123": {                        Order ID
-#     "123-1": [                    Suborder ID
-#       false,                      Finish status
-#       "2017-01-01 20:21:03",      Start date
-#       "2017-01-01 20:26:39",      End date
-#       {                           Step list
-#         "step1": "Working on it",
-#         "step2": "Paused",
-#         "step3": "Working on it",
-#         "step4": "Finished"
-#       }
-#     ],
-#     "123-2": [                    Suborder ID
-#       true,                       Finish Status
-#       "2017-01-01 20:21:39",      Start date
-#       "2017-01-01 20:25:39",      End date
-#       {                           Step list
-#         "step1": "Working on it",
-#         "step2": "Paused",
-#         "step3": "Working on it",
-#         "step4": "Finished"
-#       }
-#     ]
-#   }
-# }
 
 
 def rellenarIngredientes(tiempo):
