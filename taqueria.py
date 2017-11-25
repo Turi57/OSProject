@@ -24,6 +24,12 @@ def mesero(listaOrdenes):
         print("Mesero", len(listaOrdenes))
         if len(listaOrdenes) > 0:
             orden = listaOrdenes.pop(0)
+
+            orders_in_progress[orden["request_id"]] = {
+                "size":len(orden["orden"]),
+                "start_time":orden["datetime"]
+            }
+
             for suborder in orden["orden"]:
                 meat_type = suborder["meat"]
                 print(meat_type)
@@ -49,23 +55,41 @@ def taquero1(orderQueue):
 
 def processOrder(order):
     """Process order, add steps to response"""
+    order_id = order["part_id"][:36]
+    suborder_id = order["part_id"]
+    if suborder_id not in orders_in_progress[order_id]:
+        orders_in_progress[order_id][suborder_id] = {
+            "finish_state": False,
+            "steps": []
+        }
+    addStep(order, 1)
     for ingrediente in order["ingredients"]:
         if(ingredientes[ingrediente] < 1):
-            return [order, False]
+            addStep(order, 3)
+            return [order, False]  # Skips order, next one might not use the missing ingredient, minimizing downtime
 
     for ingrediente in order["ingredients"]:
         ingredientes[ingrediente] -= 1
 
     if order["quantity"] > 0:
         order["quantity"] -= 1
+
     if order["quantity"] == 0:
-        #look for pair order, if it is finished too, send response
-        addStep(order, 1)
+        # TODO: look for pair suborders, if it is finished too, send response
+        addStep(order, 1, 4)
         return [order, True]
 
+    addStep(order, 3)
     return [order, False]
 
-def addStep(order, step):
+
+def addStep(order, state):
+    # 1 - Running
+    # 2 - Paused
+    # 3 - Missing ingredient
+    # 4 - Finished
     order_id = order["part_id"][:36]
     suborder_id = order["part_id"]
-
+    next_step = len(orders_in_progress[order_id][suborder_id]["steps"]) + 1
+    # TODO: Add steps to orders_in_progess
+    pass
