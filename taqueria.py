@@ -58,7 +58,7 @@ def taquero1(orderQueue):
 
 def processOrder(order):
     """Process order, add steps to response"""
-
+    tacos_made = 5
     addStep(order, 1)
     for ingrediente in order["ingredients"]:
         if(ingredientes[ingrediente] < 1):
@@ -66,16 +66,22 @@ def processOrder(order):
             return [order, False]  # Skips order, next one might not use the missing ingredient, minimizing downtime
 
     for ingrediente in order["ingredients"]:
-        ingredientes[ingrediente] -= 1
+        ingredientes[ingrediente] -= tacos_made # Use up 1 unit per taco
+    if order["quantity"] > 0: # Remove tacos from order
+        if order["quantity"] < tacos_made:
+            order["quantity"] = 0
+        else:
+            order["quantity"] -= tacos_made
 
-    if order["quantity"] > 0:
-        order["quantity"] -= 1
-
-    if order["quantity"] == 0:
+    if order["quantity"] < 1:
         print("FINISHED ------------------")
-        # TODO: look for pair suborders, if it is finished too, send response
-        # Reduce size by 1, when size is 0 send response
         addStep(order, 4)
+        order_id = order["part_id"][:36]
+        orders_in_progress[order_id]["size"] -= 1
+        if orders_in_progress[order_id]["size"] == 0:
+            sendResponse(order)
+            orders_in_progress.pop(order_id)
+
         return [order, True]
 
     addStep(order, 2)
@@ -83,10 +89,7 @@ def processOrder(order):
 
 
 def addStep(order, state):
-    # 1 - Running
-    # 2 - Paused
-    # 3 - Missing ingredient
-    # 4 - Finished
+    # 1 - Running, 2 - Paused, 3 - Missing ingredient, 4 - Finished
     current_state = []
     if state == 1:
         current_state = ["Running", "Working on order"]
@@ -103,7 +106,6 @@ def addStep(order, state):
     suborder_id = order["part_id"]
     next_step = len(orders_in_progress[order_id][suborder_id]["steps"]) + 1
     now = time.strftime("%Y-%m-%d-%H-%M-%S")
-    # TODO: Add steps to orders_in_progess
     orders_in_progress[order_id][suborder_id]["steps"].append({
         "step":next_step,
         "state":current_state[0],
@@ -117,4 +119,6 @@ def addStep(order, state):
     if state == 4:
         orders_in_progress[order_id][suborder_id]["steps"][next_step-1].update({"endTime":now})
 
-    print(orders_in_progress)
+
+def sendResponse(order):
+    pass
