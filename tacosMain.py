@@ -40,8 +40,8 @@ thread_taquero3 = Thread(target=taquero1, args=[queue_cabeza_suadero_veggie])
 thread_taquero3.start()
 
 while True:
+    time.sleep(100)
     listaOrdenes.extend(readSQS())
     print(listaOrdenes)
-    time.sleep(4)
     print(ingredientes)
 
