@@ -121,4 +121,5 @@ def addStep(order, state):
 
 
 def sendResponse(order):
+    # TODO: Send response to sqs based on order in progress info
     pass
