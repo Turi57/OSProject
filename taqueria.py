@@ -9,11 +9,15 @@ queue_cabeza_suadero_veggie = queue.Queue()
 orders_in_progress = {}
 # Orders in progess format, see order_in_proges_format.txt in extras
 
+taco_lock = threading.Lock()
+# Global lock that will delimit simultaneous resource access in threads
 
 def rellenarIngredientes(tiempo):
     while True:
         time.sleep(tiempo)
+        taco_lock.acquire() #Acquire LOCK
         ingredientes[min(ingredientes, key=ingredientes.get)] += 50
+        taco_lock.release() #Release LOCK
 
 
 def mesero(listaOrdenes):
@@ -66,7 +70,10 @@ def processOrder(order):
             return [order, False]  # Skips order, next one might not use the missing ingredient, minimizing downtime
 
     for ingrediente in order["ingredients"]:
+        taco_lock.acquire() #Obtain LOCK
         ingredientes[ingrediente] -= tacos_made # Use up 1 unit per taco
+        taco_lock.release() #Release LOCK
+        
     if order["quantity"] > 0: # Remove tacos from order
         if order["quantity"] < tacos_made:
             order["quantity"] = 0
@@ -106,6 +113,8 @@ def addStep(order, state):
     suborder_id = order["part_id"]
     next_step = len(orders_in_progress[order_id][suborder_id]["steps"]) + 1
     now = time.strftime("%Y-%m-%d-%H-%M-%S")
+    
+    taco_lock.acquire() #Acquire LOCK
     orders_in_progress[order_id][suborder_id]["steps"].append({
         "step":next_step,
         "state":current_state[0],
@@ -113,6 +122,7 @@ def addStep(order, state):
         "part_id":suborder_id,
         "startTime": now
     })
+    taco_lock.release() #Release LOCK
 
     if next_step > 1:
         orders_in_progress[order_id][suborder_id]["steps"][next_step-2].update({"endTime":now})
