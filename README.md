@@ -1,12 +1,19 @@
 # Tacos Shop Operating System
 
-This application is for a Taco Shop (Tacos Franc). The project is going to have three main parts:
-• Scheduling algorithms to manage orders:
-• Tacos, Tostadas, Tortas, "Ordenes", Quesadillas, Mulitas. • Asada, Adobada, Suadero, Lengua, Cabeza.
-• Cebolla, Cilantro, Salsa (Adoba, Asada), Guacamole.
-• Taqueros, Tortillera, Meseros.
-• Meta information about waiting times, resources status, maintenance, available waiters, available tables, standing eating spaces.
-• Realtime visualizations about metadata.
+This application is for a Taco Shop (Tacos Franc). 
+The project is going to have three main parts:
+```
+* Scheduling algorithms to manage orders: 
+```
+  Tacos, Tostadas, Tortas, "Ordenes", Quesadillas, Mulitas. • Asada, Adobada, Suadero, Lengua, Cabeza.
+  Cebolla, Cilantro, Salsa (Adoba, Asada), Guacamole.
+  Taqueros, Tortillera, Meseros.
+```
+* Meta information about waiting times, resources status, maintenance, available waiters, available tables, standing eating spaces.
+```
+```
+* Realtime visualizations about metadata.
+```
 
 ## Getting Started
 
