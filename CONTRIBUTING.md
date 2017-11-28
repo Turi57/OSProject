@@ -1,4 +1,4 @@
-# Contribuidores.
+# Contributors.
 
   * Claudia King
   * Fernando Cortez
