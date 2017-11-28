@@ -92,7 +92,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 * **Claudia King** - *Initial work* - [mking20](https://github.com/mking20)
 
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/VictorPeralta/OSProject/blob/master/CONTRIBUTING.md) who participated in this project.
 
 ## Acknowledgments
 
