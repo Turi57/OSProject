@@ -1,4 +1,5 @@
-Contribuidores:
-  Claudia King
-  Fernando Cortez
-  Victor Peralta
+# Contribuidores:
+
+  * Claudia King
+  * Fernando Cortez
+  * Victor Peralta
