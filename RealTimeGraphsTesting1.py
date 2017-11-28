@@ -10,8 +10,9 @@ def main():
     tiempoPorCarne = {"asada":30, "adobada":30, "cabeza":30, "lengua":30, "suadero":30, "veggie":30, "tripa":30}
     tiempoPorTamañoOrden = {"pequeño":30, "mediano":40, "grande":60}
     ingredientesRestantes = {"cebolla":500, "salsa":400, "cilantro":200, "aguacate":170, "frijoles":390}
-
-    t = threading.Thread(target=graphThread, args=([tiempoPorTipo, tiempoPorCarne, tiempoPorTamañoOrden, ingredientesRestantes],))
+    titulos = ["Timpo Tipo", "Tiempo Carne", "Tiempo Tamaño", "Ingredientes"]
+    
+    t = threading.Thread(target=graphThread, args=([tiempoPorTipo, tiempoPorCarne, tiempoPorTamañoOrden, ingredientesRestantes], titulos))
     t.start()
     while True:
         time.sleep(1)
@@ -25,14 +26,15 @@ def updateValue(dictionary):
         dictionary[k] -= random.randint(0,5)
         
     
-def graphThread(dataDictionaryList):
+def graphThread(dataDictionaryList, graphTitlesList):
     # Instantiate the matplotlib window for graphing
     fig=plt.figure()
     
     # Create subplots and barCollections
     barCollectionsList = []
     for i, dataDictionary in enumerate(dataDictionaryList):
-        fig.add_subplot(2, 2, i + 1)
+        sub = fig.add_subplot(2, 2, i + 1)
+        sub.set_title(graphTitlesList[i])
         barcollec = plt.bar(list(dataDictionary.keys()), list(dataDictionary.values()))
         barCollectionsList.append(barcollec)
     
