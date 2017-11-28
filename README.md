@@ -1,6 +1,12 @@
-# Project Title
+# Tacos Shop Operating System
 
-One Paragraph of project description goes here
+This application is for a Taco Shop (Tacos Franc). The project is going to have three main parts:
+• Scheduling algorithms to manage orders:
+• Tacos, Tostadas, Tortas, "Ordenes", Quesadillas, Mulitas. • Asada, Adobada, Suadero, Lengua, Cabeza.
+• Cebolla, Cilantro, Salsa (Adoba, Asada), Guacamole.
+• Taqueros, Tortillera, Meseros.
+• Meta information about waiting times, resources status, maintenance, available waiters, available tables, standing eating spaces.
+• Realtime visualizations about metadata.
 
 ## Getting Started
 
@@ -82,10 +88,6 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
 
