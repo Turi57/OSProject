@@ -19,6 +19,35 @@ def graphBars(listaEtiquetas, listaValores, titulo):
     plt.xlabel("Item type")
     plt.show()
 
+def graphThread(dataDictionaryList, graphTitlesList):
+    """Function that graphs the current values of a list of dictionaries using matplotlib in real time. It has another parameter
+    for passing in the titles of the dictionaries´ graphs"""
+    
+    # Instantiate the matplotlib window for graphing
+    fig=plt.figure()
+    
+    # Create subplots and barCollections
+    barCollectionsList = []
+    for i, dataDictionary in enumerate(dataDictionaryList):
+        sub = fig.add_subplot(2, 2, i + 1)
+        sub.set_title(graphTitlesList[i])
+        barcollec = plt.bar(list(dataDictionary.keys()), list(dataDictionary.values()))
+        barCollectionsList.append(barcollec)
+    
+    # Number of frames
+    n=100
+
+    # Function used by FuncAnimation to animate the graphs
+    def animate(i):
+        for graphNumber, dataDictionary in enumerate(dataDictionaryList):
+            y = list(dataDictionary.values())
+            for i, b in enumerate(barCollectionsList[graphNumber]):
+                b.set_height(y[i])
+        
+
+    anim=animation.FuncAnimation(fig,animate,repeat=True,blit=False,frames=n,
+                                 interval=100)
+    plt.show()
     
 def obtainTacosByType(listaOrdenes):
     cantidadPorTipo = {"Taco": 0, "Quesadilla": 0, "Mulita": 0, "Tostada": 0, "Vampiro": 0}
