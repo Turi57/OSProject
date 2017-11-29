@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt; plt.rcdefaults()
 import matplotlib.pyplot as plt
+import matplotlib.animation as animation
 from jsonOrder import *
 import numpy as np
 import tabulate
@@ -32,7 +33,9 @@ def graphThread(dataDictionaryList, graphTitlesList):
         sub = fig.add_subplot(2, 3, i + 1)
         sub.set_title(graphTitlesList[i])
         sub.tick_params(labelsize=10)
-        barcollec = plt.bar(list(dataDictionary.keys()), list(dataDictionary.values()))
+        labels = list(dataDictionary.keys())
+        barcollec = plt.bar(range(len(labels)), list(dataDictionary.values()))
+        #sub.set_xtics(range(len(labels)), labels)
         barCollectionsList.append(barcollec)
     
     # Number of frames

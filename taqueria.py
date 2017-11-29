@@ -13,7 +13,9 @@ orders_in_progress = {}
 def rellenarIngredientes(tiempo):
     while True:
         time.sleep(tiempo)
-        ingredientes[min(ingredientes, key=ingredientes.get)] += 50
+        short_ingredient = min(ingredientes, key=ingredientes.get)
+        if ingredientes[short_ingredient] <= 450:
+            ingredientes[short_ingredient] += 50
 
 
 def mesero(listaOrdenes):
