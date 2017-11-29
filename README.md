@@ -42,7 +42,7 @@ The project is going to have three main parts:
 ```
 Atender a dos clientes al mismo tiempo vs atender a 5 clientes al mismo tiempo.
 ```
-* The read queue is : https://sqs.us-east-1.amazonaws.com/292274580527/cc406_team4 and the write one is: https://sqs.us-east-1.amazonaws.com/292274580527/cc406_response4 (Where 4 is the number team. Each team has its own queue to read and write.
+* The read queue is : https://sqs.us-east-1.amazonaws.com/292274580527/cc406_team4 and the write one is: https://sqs.us-east-1.amazonaws.com/292274580527/cc406_response4 (Where 4 is the number team. Each team has its own queue to read and write.)
 * JSON format:
 ```
 {  
@@ -101,7 +101,7 @@ Atender a dos clientes al mismo tiempo vs atender a 5 clientes al mismo tiempo.
    }
 }
 ```
-*To run the program it is necessary to install some librabries:
+To run the program it is necessary to install some librabries:
 
 * You need to install some libraries in python to see the graphs of the project.
 
