@@ -12,7 +12,7 @@ The project is going to have three main parts:
 * Meta information about waiting times, resources status, maintenance, available waiters, available tables, standing eating spaces.
 * Realtime visualizations about metadata.
 
-### Prerequisites
+### Requisites
 * Each "taquero" has his own fairy of dreams(tortillera).
 * Five Graphs, for example:
 ```
