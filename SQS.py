@@ -29,7 +29,9 @@ def readSQS():
 
     if response != None:
         for order in response["Messages"]:
-            listOrders.append(json.loads(order["Body"]))
+            json_order= json.loads(order["Body"])
+            json_order["ReceiptHandle"] = order["ReceiptHandle"]
+            listOrders.append(json_order)
 
     return listOrders
 
@@ -39,3 +41,7 @@ def putSQS(message):
     print(queue.url)
 
     response = queue.send_message(MessageBody=message)
+
+def deleteSQS(receiptHandle):
+    sqs = boto3.resource('sqs')
+    sqs.delete_message(QueueURL='https://sqs.us-east-1.amazonaws.com/292274580527/cc406_team3', ReceiptHandle=receiptHandle)
