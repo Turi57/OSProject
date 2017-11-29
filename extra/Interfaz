@@ -70,3 +70,31 @@ class Application(ttk.Frame):
 main_window = tk.Tk()
 app = Application(main_window)
 app.mainloop()
+
+#Opcion3
+from PyQt4 import QtCore
+from PyQt4 import QtGui as qt
+
+from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.backends.backend_qt4agg import NavigationToolbar2QT as NavigationToolbar
+from matplotlib.figure import Figure
+
+import itertools
+class MultiTabNavTool(qt.QWidget):
+
+    def __init__(self, canvases, tabs, parent=None):
+        qt.QWidget.__init__(self, parent)
+        self.canvases = canvases
+        self.tabs = tabs
+        self.toolbars = [NavigationToolbar(canvas, parent) for canvas in self.canvases]
+        vbox = qt.QVBoxLayout()
+        for toolbar in self.toolbars:
+            vbox.addWidget(toolbar)
+        self.setLayout(vbox)
+        self.switch_toolbar()
+        self.tabs.currentChanged.connect(self.switch_toolbar)
+
+    def switch_toolbar(self):
+        for toolbar in self.toolbars:
+            toolbar.setVisible(False)
+        self.toolbars[self.tabs.currentIndex()].setVisible(True)
