@@ -30,7 +30,7 @@ def mesero(listaOrdenes):
 
             orders_in_progress[orden["request_id"]] = {
                 "size":len(orden["orden"]),
-                "start_time":orden["datetime"]
+                "start_time":orden["datetime"],
                 "ReceiptHandle":orden["ReceiptHandle"] ## Add receiptHandle
             }
 
