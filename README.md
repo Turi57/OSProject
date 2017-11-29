@@ -6,43 +6,28 @@ The project is going to have three main parts:
 * Scheduling algorithms to manage orders:
 ```
   Tacos, Tostadas, Tortas, Quesadillas, Mulitas --> "Ordenes": Asada, Adobada, Suadero, Lengua, Cabeza.
-  Ingredients: Cebolla, Cilantro, Salsa (Adoba, Asada), Guacamole.
-  Taqueros, Tortillera, Meseros.
+  "Ingredientes": Cebolla, Cilantro, Salsa, Frijoles y Guacamole.
+  "Threads": Taqueros, Tortillera, Meseros.
 ```
 * Meta information about waiting times, resources status, maintenance, available waiters, available tables, standing eating spaces.
 * Realtime visualizations about metadata.
 
-
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
-
 ### Prerequisites
 
-What things you need to install the software and how to install them
+You need to install a library in python to see the graphs of the project.
 
 ```
-Give examples
+import matplotlib.pyplot as plt
 ```
 
 ### Installing
 
-A step by step series of examples that tell you have to get a development env running
-
-Say what the step will be
+In the terminal of linux you can write the next example:
 
 ```
-Give the example
+sudo apt-get install python-matplotlib
 ```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
+And that's it, now you can see how the real time graphs of the project interact.
 
 ## Running the tests
 
