@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from PyQt4 import QtGui, QtCore
-33sudo apt-get install python-qt4
+##sudo apt-get install python-qt4
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 import random
