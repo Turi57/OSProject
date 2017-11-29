@@ -130,14 +130,6 @@ And that's it, now you can see how the real time graphs of the project interact.
 
 Explain how to run the automated tests for this system
 
-## Tacos "Franc"
-
-![picture alt](https://www.google.com.mx/maps/uv?hl=es&pb=!1s0x80d94853cb565b91%3A0x55120f98dba7b0bf!2m22!2m2!1i80!2i80!3m1!2i20!16m16!1b1!2m2!1m1!1e1!2m2!1m1!1e3!2m2!1m1!1e5!2m2!1m1!1e4!2m2!1m1!1e6!3m1!7e115!4shttps%3A%2F%2Fpicasaweb.google.com%2Flh%2Fsredir%3Funame%3D104813357045780408667%26id%3D6455118545276673058%26target%3DPHOTO!5stacos%20franc%20-%20Buscar%20con%20Google&imagekey=!1e10!2sAF1QipOYlbMLKENeUz-U8KkMRroQNX9oKtgoMWjhVN_8&sa=X&ved=0ahUKEwie0bn7jePXAhVK6mMKHdIJBvcQoioIjAEwDw "Title is optional")
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-
 ## Contributing
 
 Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
