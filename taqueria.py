@@ -35,7 +35,6 @@ def mesero(listaOrdenes):
                 "start_time": orden["datetime"],
                 "steps": [],
                 "start_time":orden["datetime"],
-                "ReceiptHandle":orden["ReceiptHandle"] ## Add receiptHandle
             }
 
             for suborder in orden["orden"]:
@@ -96,8 +95,6 @@ def processOrder(order):
             del distributed_orders[order_id]["ReceiptHandle"]
             deleteSQS(receipt)
             print("DELETE", receipt)
-            receipt = orders_in_progress[order_id]["ReceiptHandle"]
-            del orders_in_progress[order_id]["ReceiptHandle"]
             #deleteSQS(receipt)
             
             # Send response to SQS
