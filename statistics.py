@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt; plt.rcdefaults()
 import matplotlib.pyplot as plt
+import matplotlib.animation as animation
 from jsonOrder import *
 import numpy as np
 import tabulate
@@ -29,9 +30,12 @@ def graphThread(dataDictionaryList, graphTitlesList):
     # Create subplots and barCollections
     barCollectionsList = []
     for i, dataDictionary in enumerate(dataDictionaryList):
-        sub = fig.add_subplot(2, 2, i + 1)
+        sub = fig.add_subplot(2, 3, i + 1)
         sub.set_title(graphTitlesList[i])
-        barcollec = plt.bar(list(dataDictionary.keys()), list(dataDictionary.values()))
+        sub.tick_params(labelsize=10)
+        labels = list(dataDictionary.keys())
+        barcollec = plt.bar(range(len(labels)), list(dataDictionary.values()))
+        sub.set_xticklabels(labels)
         barCollectionsList.append(barcollec)
     
     # Number of frames
@@ -49,8 +53,10 @@ def graphThread(dataDictionaryList, graphTitlesList):
                                  interval=100)
     plt.show()
     
-def obtainTacosByType(listaOrdenes):
-    cantidadPorTipo = {"Taco": 0, "Quesadilla": 0, "Mulita": 0, "Tostada": 0, "Vampiro": 0}
+def obtainTacosByType(listaOrdenes, cantidadPorTipo):
+    #cantidadPorTipo = {"Taco": 0, "Quesadilla": 0, "Mulita": 0, "Tostada": 0, "Vampiro": 0}
+    for k, v in cantidadPorTipo.items():
+        cantidadPorTipo[k] = 0
     for orden in listaOrdenes:
         subordenes = orden["orden"]
         for i in range(len(subordenes)):
@@ -58,8 +64,10 @@ def obtainTacosByType(listaOrdenes):
             cantidadPorTipo[currentType] += subordenes[i]["quantity"]
     return cantidadPorTipo
 
-def obtainTacosByMeat(listaOrdenes):
-    cantidadPorCarne = {"Asada":0, "Adobada":0, "Cabeza":0, "Lengua":0, "Suadero":0, "Veggie":0, "Tripa":0}
+def obtainTacosByMeat(listaOrdenes, cantidadPorCarne):
+    #cantidadPorCarne = {"Asada":0, "Adobada":0, "Cabeza":0, "Lengua":0, "Suadero":0, "Veggie":0, "Tripa":0}
+    for k, v in cantidadPorCarne.items():
+        cantidadPorCarne[k] = 0
     for orden in listaOrdenes:
         subordenes = orden["orden"]
         for i in range(len(subordenes)):

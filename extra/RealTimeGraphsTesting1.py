@@ -35,6 +35,7 @@ def graphThread(dataDictionaryList, graphTitlesList):
     for i, dataDictionary in enumerate(dataDictionaryList):
         sub = fig.add_subplot(2, 2, i + 1)
         sub.set_title(graphTitlesList[i])
+        sub.tick_params(labelsize=8)
         barcollec = plt.bar(list(dataDictionary.keys()), list(dataDictionary.values()))
         barCollectionsList.append(barcollec)
     
