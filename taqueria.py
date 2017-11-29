@@ -3,6 +3,8 @@ import queue
 from SQS import *
 
 ingredientes = {"Guacamole":500, "Cebolla":500, "Cilantro":500, "Frijoles":500, "Salsa":500}
+responseTimes = {"Pequeño":[], "Mediano":[], "Grande":[]}
+
 queue_asada_tripa = queue.Queue()
 queue_adobada_lengua = queue.Queue()
 queue_cabeza_suadero_veggie = queue.Queue()
@@ -31,7 +33,9 @@ def mesero(listaOrdenes):
             orders_in_progress[orden["request_id"]] = {
                 "size":len(orden["orden"]),
                 "start_time": orden["datetime"],
-                "steps": []
+                "steps": [],
+                "start_time":orden["datetime"],
+                "ReceiptHandle":orden["ReceiptHandle"] ## Add receiptHandle
             }
 
             for suborder in orden["orden"]:
@@ -92,6 +96,10 @@ def processOrder(order):
             del distributed_orders[order_id]["ReceiptHandle"]
             deleteSQS(receipt)
             print("DELETE", receipt)
+            receipt = orders_in_progress[order_id]["ReceiptHandle"]
+            del orders_in_progress[order_id]["ReceiptHandle"]
+            #deleteSQS(receipt)
+            
             # Send response to SQS
             sendResponse(order)
             orders_in_progress.pop(order_id)
