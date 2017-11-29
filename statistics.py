@@ -29,8 +29,9 @@ def graphThread(dataDictionaryList, graphTitlesList):
     # Create subplots and barCollections
     barCollectionsList = []
     for i, dataDictionary in enumerate(dataDictionaryList):
-        sub = fig.add_subplot(2, 2, i + 1)
+        sub = fig.add_subplot(2, 3, i + 1)
         sub.set_title(graphTitlesList[i])
+        sub.tick_params(labelsize=10)
         barcollec = plt.bar(list(dataDictionary.keys()), list(dataDictionary.values()))
         barCollectionsList.append(barcollec)
     
