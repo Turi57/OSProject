@@ -8,6 +8,7 @@ queue_adobada_lengua = queue.Queue()
 queue_cabeza_suadero_veggie = queue.Queue()
 
 orders_in_progress = {}
+distributed_orders = {}
 # Orders in progess format, see order_in_proges_format.txt in extras
 
 
@@ -24,6 +25,8 @@ def mesero(listaOrdenes):
         print("Mesero", len(listaOrdenes))
         if len(listaOrdenes) > 0:
             orden = listaOrdenes.pop(0)
+            distributed_orders[orden["request_id"]] = orden
+
 
             orders_in_progress[orden["request_id"]] = {
                 "size":len(orden["orden"]),
@@ -77,11 +80,12 @@ def processOrder(order):
         else:
             orders_in_progress[order_id][suborder_id]["quantity"] -= tacos_made
 
-    if order["quantity"] < 1:
+    if orders_in_progress[order_id][suborder_id]["quantity"] < 1:
         print("FINISHED ------------------")
         addStep(order, 4)
         print(orders_in_progress)
-
+        order_id = order["part_id"][:36]
+        orders_in_progress[order_id]["size"] -= 1
         if orders_in_progress[order_id]["size"] == 0:
             sendResponse(order)
             orders_in_progress.pop(order_id)
@@ -109,7 +113,7 @@ def addStep(order, state):
     order_id = order["part_id"][:36]
     suborder_id = order["part_id"]
     next_step = len(orders_in_progress[order_id]["steps"]) + 1
-    now = time.strftime("%Y-%m-%d-%H-%M-%S")
+    now = time.strftime("%Y-%m-%d %H:%M:%S")
     orders_in_progress[order_id]["steps"].append({
         "step":next_step,
         "state":current_state[0],
@@ -126,6 +130,15 @@ def addStep(order, state):
 
 def sendResponse(order):
     # TODO: Send response to sqs based on order in progress info
-
-    # putSQS(message)
+    print()
+    order_stats = orders_in_progress[order["part_id"][:36]]
+    message = {"answer":{
+        "start_time":order_stats["start_time"],
+        "end_date": order_stats["steps"][-1]["endTime"],
+        "steps":order_stats["steps"]
+    }}
+    message.update(distributed_orders[order["part_id"][:36]])
+    print(message)
+    message = json.dumps(message)
+    putSQS(message)
     pass
