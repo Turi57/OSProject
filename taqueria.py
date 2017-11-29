@@ -1,10 +1,12 @@
 import time
 import queue
+import threading
 from SQS import *
 
 ingredientes = {"Guacamole":500, "Cebolla":500, "Cilantro":500, "Frijoles":500, "Salsa":500}
 responseTimes = {"Pequeño":[], "Mediano":[], "Grande":[]}
 
+# Global queues
 queue_asada_tripa = queue.Queue()
 queue_adobada_lengua = queue.Queue()
 queue_cabeza_suadero_veggie = queue.Queue()
@@ -13,12 +15,15 @@ orders_in_progress = {}
 distributed_orders = {}
 # Orders in progess format, see order_in_proges_format.txt in extras
 
+# Thread resource lock
+lock = threading.Lock()
 
 def rellenarIngredientes(tiempo):
     while True:
         time.sleep(tiempo)
+        lock.acquire()
         ingredientes[min(ingredientes, key=ingredientes.get)] += 50
-
+        lock.release()
 
 def mesero(listaOrdenes):
     """Takes orders and submits them to appropriate queue"""
@@ -76,7 +81,9 @@ def processOrder(order):
             return [order, False]  # Skips order, next one might not use the missing ingredient, minimizing downtime
 
     for ingrediente in order["ingredients"]:
+        lock.acquire() #LOCK ACQUIRE
         ingredientes[ingrediente] -= tacos_made # Use up 1 unit per taco
+        lock.release() #LOCK RELEASE
     if orders_in_progress[order_id][suborder_id]["quantity"] > 0: # Remove tacos from order
         if orders_in_progress[order_id][suborder_id]["quantity"] < tacos_made:
             orders_in_progress[order_id][suborder_id]["quantity"] = 0
@@ -92,15 +99,16 @@ def processOrder(order):
         if orders_in_progress[order_id]["size"] == 0:
             # Delete the order from SQS using the receipt handle
             receipt = distributed_orders[order_id]["ReceiptHandle"]
-            distributed_orders.pop(order_id)
+            distributed_orders[order_id]["ReceiptHandle"] = "Deleted"
             #deleteSQS(receipt)
             print("DELETE", receipt)
 
 
             # Send response to SQS
             sendResponse(order)
+            lock.acquire() #ACQUIRE LOCK
             orders_in_progress.pop(order_id)
-
+            lock.release() #RELEASE LOCK
         return [order, True]
 
     addStep(order, 2)
@@ -123,6 +131,7 @@ def addStep(order, state):
 
     order_id = order["part_id"][:36]
     suborder_id = order["part_id"]
+    lock.acquire() #ACQUIRE LOCK
     next_step = len(orders_in_progress[order_id]["steps"]) + 1
     now = time.strftime("%Y-%m-%d %H:%M:%S")
     orders_in_progress[order_id]["steps"].append({
@@ -132,7 +141,7 @@ def addStep(order, state):
         "part_id":suborder_id,
         "startTime": now
     })
-
+    lock.release() #RELEASE LOCK
     if next_step > 1:
         orders_in_progress[order_id]["steps"][next_step-2].update({"endTime":now})
     if state == 4:
