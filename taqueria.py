@@ -90,10 +90,10 @@ def processOrder(order):
         order_id = order["part_id"][:36]
         orders_in_progress[order_id]["size"] -= 1
         if orders_in_progress[order_id]["size"] == 0:
-            # Remove the receiptHandle from the json order
+            # Delete the order from SQS using the receipt handle
             receipt = distributed_orders[order_id]["ReceiptHandle"]
-            del distributed_orders[order_id]["ReceiptHandle"]
-            deleteSQS(receipt)
+            distributed_orders.pop(order_id)
+            #deleteSQS(receipt)
             print("DELETE", receipt)
 
 
