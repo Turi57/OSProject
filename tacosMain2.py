@@ -18,11 +18,15 @@ listaOrdenes.extend(readSQS())
 printTable(listaOrdenes)
 
 # Graph different aspects of the current orders
-#tipos = obtainTacosByType(listaOrdenes)
-#carnes = obtainTacosByMeat(listaOrdenes)
 
-#graphTacos(tipos, "Tipos")
-#graphTacos(carnes, "Carnes")
+tipos = {"Taco":50, "Quesadilla":50, "Mulita":50, "Tostada":50, "Vampiro":50}
+carnes = {"Asada":50, "Adobada":50, "Cabeza":50, "Lengua":50, "Suadero":50, "Veggie":50, "Tripa":50}
+
+def updateGraphDictionaries(listaOrdenes, dict_tipos, dict_carnes, sleep_time):
+    while True:
+        obtainTacosByType(listaOrdenes, dict_tipos)
+        obtainTacosByMeat(listaOrdenes, dict_carnes)
+        time.sleep(sleep_time)
 
 thread_ingredientes = Thread(target=rellenarIngredientes, args=[1])
 thread_ingredientes.start()
@@ -39,8 +43,11 @@ thread_taquero2.start()
 thread_taquero3 = Thread(target=taquero1, args=[queue_cabeza_suadero_veggie])
 thread_taquero3.start()
 
-thread_grafica = Thread(target=graphThread, args=[[ingredientes], ["ingredientes"]])
+thread_grafica = Thread(target=graphThread, args=[[ingredientes, tipos, carnes], ["ingredientes", "tipos", "carnes"]])
 thread_grafica.start()
+
+thread_update = Thread(target=updateGraphDictionaries, args=[listaOrdenes, tipos, carnes, 0.25])
+thread_update.start()
 
 while True:
     time.sleep(10)
