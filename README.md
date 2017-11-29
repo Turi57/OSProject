@@ -101,7 +101,9 @@ Atender a dos clientes al mismo tiempo vs atender a 5 clientes al mismo tiempo.
    }
 }
 ```
-You need to install a library in python to see the graphs of the project.
+*To run the program it is necessary to install some librabries:
+
+* You need to install some libraries in python to see the graphs of the project.
 
 ```
 import matplotlib.pyplot as plt
@@ -114,15 +116,23 @@ In the terminal of linux you can write the next example:
 ```
 sudo apt-get install python-matplotlib
 ```
+Another libray that will be needed is goignt to be installed like this:
+```
+sudo apt-get install python-tabulate
+```
+Moreover, is necessary to have boto3:
+```
+sudo apt-get install python-boto3
+```
 And that's it, now you can see how the real time graphs of the project interact.
 
 ## Running the tests
 
 Explain how to run the automated tests for this system
 
-## Image Example
+## Tacos "Franc"
 
-![picture alt](http://www.brightlightpictures.com/assets/images/portfolio/thethaw_header.jpg "Title is optional")
+![picture alt](https://www.google.com.mx/maps/uv?hl=es&pb=!1s0x80d94853cb565b91%3A0x55120f98dba7b0bf!2m22!2m2!1i80!2i80!3m1!2i20!16m16!1b1!2m2!1m1!1e1!2m2!1m1!1e3!2m2!1m1!1e5!2m2!1m1!1e4!2m2!1m1!1e6!3m1!7e115!4shttps%3A%2F%2Fpicasaweb.google.com%2Flh%2Fsredir%3Funame%3D104813357045780408667%26id%3D6455118545276673058%26target%3DPHOTO!5stacos%20franc%20-%20Buscar%20con%20Google&imagekey=!1e10!2sAF1QipOYlbMLKENeUz-U8KkMRroQNX9oKtgoMWjhVN_8&sa=X&ved=0ahUKEwie0bn7jePXAhVK6mMKHdIJBvcQoioIjAEwDw "Title is optional")
 ## Deployment
 
 Add additional notes about how to deploy this on a live system
