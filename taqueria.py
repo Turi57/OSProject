@@ -2,6 +2,8 @@ import time
 import queue
 
 ingredientes = {"Guacamole":500, "Cebolla":500, "Cilantro":500, "Frijoles":500, "Salsa":500}
+responseTimes = {"Pequeño":[], "Mediano":[], "Grande":[]}
+
 queue_asada_tripa = queue.Queue()
 queue_adobada_lengua = queue.Queue()
 queue_cabeza_suadero_veggie = queue.Queue()
