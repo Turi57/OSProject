@@ -29,7 +29,7 @@ def readSQS():
 
     if response != None:
         for order in response["Messages"]:
-            json_order= json.loads(order["Body"])
+            json_order = json.loads(order["Body"])
             json_order["ReceiptHandle"] = order["ReceiptHandle"]
             listOrders.append(json_order)
 
