@@ -96,7 +96,10 @@ def processOrder(order):
             deleteSQS(receipt)
             print("DELETE", receipt)
             #deleteSQS(receipt)
-            
+            receipt = orders_in_progress[order_id]["ReceiptHandle"]
+            del orders_in_progress[order_id]["ReceiptHandle"]
+ #           deleteSQS(receipt)
+
             # Send response to SQS
             sendResponse(order)
             orders_in_progress.pop(order_id)
