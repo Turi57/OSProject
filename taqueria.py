@@ -31,6 +31,7 @@ def mesero(listaOrdenes):
             orders_in_progress[orden["request_id"]] = {
                 "size":len(orden["orden"]),
                 "start_time":orden["datetime"]
+                "ReceiptHandle":orden["ReceiptHandle"] ## Add receiptHandle
             }
 
             for suborder in orden["orden"]:
@@ -84,7 +85,7 @@ def processOrder(order):
         orders_in_progress[order_id]["size"] -= 1
         if orders_in_progress[order_id]["size"] == 0:
             # Remove the receiptHandle from the json order
-            receipt = order["ReceiptHandle"]
+            receipt = orders_in_progress[order_id]["ReceiptHandle"]
             del order["ReceiptHandle"]
             #deleteSQS(receipt)
             
