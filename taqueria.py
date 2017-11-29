@@ -15,9 +15,7 @@ distributed_orders = {}
 def rellenarIngredientes(tiempo):
     while True:
         time.sleep(tiempo)
-        short_ingredient = min(ingredientes, key=ingredientes.get)
-        if ingredientes[short_ingredient] <= 450:
-            ingredientes[short_ingredient] += 50
+        ingredientes[min(ingredientes, key=ingredientes.get)] += 50
 
 
 def mesero(listaOrdenes):
@@ -90,8 +88,8 @@ def processOrder(order):
         orders_in_progress[order_id]["size"] -= 1
         if orders_in_progress[order_id]["size"] == 0:
             # Remove the receiptHandle from the json order
-            receipt = order["ReceiptHandle"]
-            del order["ReceiptHandle"]
+            # receipt = order["ReceiptHandle"]
+            # del order["ReceiptHandle"]
             #deleteSQS(receipt)
             
             # Send response to SQS
@@ -138,7 +136,6 @@ def addStep(order, state):
 
 def sendResponse(order):
     # TODO: Send response to sqs based on order in progress info
-<<<<<<< HEAD
     print()
     order_stats = orders_in_progress[order["part_id"][:36]]
     message = {"answer":{
@@ -149,8 +146,4 @@ def sendResponse(order):
     message.update(distributed_orders[order["part_id"][:36]])
     print(message)
     message = json.dumps(message)
-    putSQS(message)
-    pass
-=======
-    pass
->>>>>>> c41ce2ae11372f73edd0a515ce7f5aa6d698790d
+    # putSQS(message)

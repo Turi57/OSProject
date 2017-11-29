@@ -1,4 +1,3 @@
-from jsonOrder import *
 from SQS import *
 from statistics import *
 from taqueria import *
