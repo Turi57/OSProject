@@ -1,5 +1,6 @@
 import time
 import queue
+from SQS import *
 
 ingredientes = {"Guacamole":500, "Cebolla":500, "Cilantro":500, "Frijoles":500, "Salsa":500}
 queue_asada_tripa = queue.Queue()
@@ -26,13 +27,14 @@ def mesero(listaOrdenes):
 
             orders_in_progress[orden["request_id"]] = {
                 "size":len(orden["orden"]),
-                "start_time":orden["datetime"]
+                "start_time": orden["datetime"],
+                "steps": []
             }
 
             for suborder in orden["orden"]:
                 orders_in_progress[orden["request_id"]][suborder["part_id"]] = {
                     "finish_state": False,
-                    "steps": []
+                    "quantity": suborder["quantity"]
                 }
                 meat_type = suborder["meat"]
                 print(meat_type)
@@ -57,6 +59,8 @@ def taquero1(orderQueue):
 
 
 def processOrder(order):
+    order_id = order["part_id"][:36]
+    suborder_id = order["part_id"]
     """Process order, add steps to response"""
     tacos_made = 5
     addStep(order, 1)
@@ -67,17 +71,17 @@ def processOrder(order):
 
     for ingrediente in order["ingredients"]:
         ingredientes[ingrediente] -= tacos_made # Use up 1 unit per taco
-    if order["quantity"] > 0: # Remove tacos from order
-        if order["quantity"] < tacos_made:
-            order["quantity"] = 0
+    if orders_in_progress[order_id][suborder_id]["quantity"] > 0: # Remove tacos from order
+        if orders_in_progress[order_id][suborder_id]["quantity"] < tacos_made:
+            orders_in_progress[order_id][suborder_id]["quantity"] = 0
         else:
-            order["quantity"] -= tacos_made
+            orders_in_progress[order_id][suborder_id]["quantity"] -= tacos_made
 
     if order["quantity"] < 1:
         print("FINISHED ------------------")
         addStep(order, 4)
-        order_id = order["part_id"][:36]
-        orders_in_progress[order_id]["size"] -= 1
+        print(orders_in_progress)
+
         if orders_in_progress[order_id]["size"] == 0:
             sendResponse(order)
             orders_in_progress.pop(order_id)
@@ -104,9 +108,9 @@ def addStep(order, state):
 
     order_id = order["part_id"][:36]
     suborder_id = order["part_id"]
-    next_step = len(orders_in_progress[order_id][suborder_id]["steps"]) + 1
+    next_step = len(orders_in_progress[order_id]["steps"]) + 1
     now = time.strftime("%Y-%m-%d-%H-%M-%S")
-    orders_in_progress[order_id][suborder_id]["steps"].append({
+    orders_in_progress[order_id]["steps"].append({
         "step":next_step,
         "state":current_state[0],
         "action":current_state[1],
@@ -115,11 +119,13 @@ def addStep(order, state):
     })
 
     if next_step > 1:
-        orders_in_progress[order_id][suborder_id]["steps"][next_step-2].update({"endTime":now})
+        orders_in_progress[order_id]["steps"][next_step-2].update({"endTime":now})
     if state == 4:
-        orders_in_progress[order_id][suborder_id]["steps"][next_step-1].update({"endTime":now})
+        orders_in_progress[order_id]["steps"][next_step-1].update({"endTime":now})
 
 
 def sendResponse(order):
     # TODO: Send response to sqs based on order in progress info
+
+    # putSQS(message)
     pass

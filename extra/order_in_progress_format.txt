@@ -3,37 +3,14 @@
     "size":10,
     "start_time":"2020-09-03 20:12:31",
     "123-1": {
-      "finish_state":false,
-      "steps":[
-         {
-            "step":1,
-            "state":"running",
-            "action":"working on orden",
-            "part_id":"123-123",
-            "startTime":"",
-            "endTime":""
-         },
-         {
-            "step":2,
-            "state":"suspend",
-            "action":"waiting for cheese",
-            "part_id":"123-222",
-            "start_time":"",
-            "end_date":""
-         },
-         {
-            "step":3,
-            "state":"running",
-            "action":"working on orden",
-            "part_id":"123-222",
-            "start_time":"",
-            "end_date":""
-         }
-      ]
+      "finish_state":false
+      "size":4
     },
     "123-2": {
-      "finish_state":true,
-      "steps":[
+      "finish_state":true
+      "size":12
+    },
+    "steps":[
          {
             "step":1,
             "state":"running",
@@ -58,8 +35,6 @@
             "start_time":"",
             "end_date":""
          }
-      ]
-    }
     "end_time":"2018-11-11 12:31:21"
   }
 }
