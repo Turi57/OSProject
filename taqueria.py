@@ -21,9 +21,9 @@ lock = threading.Lock()
 def rellenarIngredientes(tiempo):
     while True:
         time.sleep(tiempo)
-        lock.acquire()
+        lock.acquire() #ACQUIRE LOCK
         ingredientes[min(ingredientes, key=ingredientes.get)] += 50
-        lock.release()
+        lock.release() #RELEASE LOCK
 
 def mesero(listaOrdenes):
     """Takes orders and submits them to appropriate queue"""
@@ -95,7 +95,10 @@ def processOrder(order):
         addStep(order, 4)
         print(orders_in_progress)
         order_id = order["part_id"][:36]
+        lock.acquire() #ACQUIRE LOCK
         orders_in_progress[order_id]["size"] -= 1
+        lock.release() #RELEASE LOCK
+
         if orders_in_progress[order_id]["size"] == 0:
             # Delete the order from SQS using the receipt handle
             receipt = distributed_orders[order_id]["ReceiptHandle"]
