@@ -126,13 +126,18 @@ sudo apt-get install python-boto3
 ```
 And that's it, now you can see how the real time graphs of the project interact.
 
-## Running the tests
+## Diagrams
 
-Explain how to run the automated tests for this system
+First Diagram:
+[Taquero Diagram](https://github.com/VictorPeralta/OSProject/blob/master/extra/Taquero_Diagram.png)
+
+Second Diagram:
+[Mesero Diagram](https://github.com/VictorPeralta/OSProject/blob/master/extra/Mesero_Diagram.png)
+
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](https://github.com/VictorPeralta/OSProject/blob/master/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Authors
 
