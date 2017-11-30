@@ -20,9 +20,9 @@ distributed_orders = {}
 lock = threading.Lock()
 
 
-def rellenarIngredientes(tiempo):
+def rellenarIngredientes():
     while True:
-        time.sleep(tiempo)
+        time.sleep(5)
         lock.acquire()
         short_ingredient = min(ingredientes, key=ingredientes.get)
         if ingredientes[short_ingredient] <= 450:

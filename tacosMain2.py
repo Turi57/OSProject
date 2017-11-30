@@ -37,7 +37,8 @@ def updateGraphDictionaries(dict_orders, dict_tipos, dict_carnes, dict_tamanos, 
         # Small delay
         time.sleep(sleep_time)
 
-thread_ingredientes = Thread(target=rellenarIngredientes, args=[1])
+
+thread_ingredientes = Thread(target=rellenarIngredientes)
 thread_ingredientes.start()
 
 thread_mesero = Thread(target=mesero, args=[listaOrdenes])
