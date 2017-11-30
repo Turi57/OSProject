@@ -1,0 +1,50 @@
+Hello World
+Hello World
+Hello World
+Hello World
+Hello World
+Hello World
+Hello World
+
+Hello World
+Hello World
+
+Try apt-get
+Then apt-get update
+Use sudo to run the previous command as an administrator
+sudo apt-get update
+
+Install git using:
+sudo apt-get install git
+
+Then try ls and its -l -a -la -lia options
+
+For indexing the data structured used is a B Tree
+Use clear and mkdir clear, touch (to create a file), vi, cp (copy)
+ctrl a or ctrl e
+
+cp origen destino
+
+~ home directory
+
+mv file destination
+
+.. one folder up
+
+rm Remove file
+rmdir Remove empty directory
+rm -rf Remove recursive and force
+
+SECOND SET OF COMMANDS
+vi Text Editor
+
+i option insert
+q! override 
+wq override
+
+
+
+
+
+
+
