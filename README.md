@@ -144,9 +144,3 @@ Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c6
 
 
 See also the list of [contributors](https://github.com/VictorPeralta/OSProject/blob/master/contributors.md) who participated in this project.
-
-## Acknowledgments
-
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
