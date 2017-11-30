@@ -24,10 +24,12 @@ def rellenarIngredientes(tiempo):
     while True:
         time.sleep(tiempo)
         lock.acquire()
-        ingredientes[min(ingredientes, key=ingredientes.get)] += 50
-        tortillas[0] += 50
-        tortillas[1] += 50
-        tortillas[2] += 50
+        short_ingredient = min(ingredientes, key=ingredientes.get)
+        if ingredientes[short_ingredient] <= 450:
+            ingredientes[short_ingredient] += 50
+        tortillas[0] += 5
+        tortillas[1] += 5
+        tortillas[2] += 5
         lock.release()
 
 
