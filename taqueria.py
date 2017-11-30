@@ -5,6 +5,9 @@ from SQS import *
 
 ingredientes = {"Guacamole":500, "Cebolla":500, "Cilantro":500, "Frijoles":500, "Salsa":500}
 responseTimes = {"Pequeño":[], "Mediano":[], "Grande":[]}
+tortillas_asada_tripa = 500
+tortillas_adobada_lengua = 500
+tortillas_cabeza_suadero_veggie = 500
 
 # Global queues
 queue_asada_tripa = queue.Queue()
@@ -75,8 +78,17 @@ def processOrder(order):
     """Process order, add steps to response"""
     tacos_made = 5
     addStep(order, 1)
+    meat_type = order["meat"]
     for ingrediente in order["ingredients"]:
-        if(ingredientes[ingrediente] < 1):
+
+        if(ingredientes[ingrediente] < tacos_made):
+            if meat_type == "Asada" or meat_type == "Tripa":
+                if tortillas_asada_tripa < 500:
+
+            elif meat_type == "Adobada" or meat_type == "Lengua":
+                queue_adobada_lengua.put(suborder)
+            else:
+                queue_cabeza_suadero_veggie.put(suborder)
             addStep(order, 3)
             return [order, False]  # Skips order, next one might not use the missing ingredient, minimizing downtime
 

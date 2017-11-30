@@ -1,4 +1,3 @@
-from jsonOrder import *
 from SQS import *
 from statistics import *
 from taqueria import *
@@ -18,11 +17,11 @@ listaOrdenes.extend(readSQS())
 printTable(listaOrdenes)
 
 # Graph different aspects of the current orders
-tipos = obtainTacosByType(listaOrdenes)
-carnes = obtainTacosByMeat(listaOrdenes)
-
-graphTacos(tipos, "Tipos")
-graphTacos(carnes, "Carnes")
+# tipos = obtainTacosByType(listaOrdenes)
+# carnes = obtainTacosByMeat(listaOrdenes)
+#
+# graphTacos(tipos, "Tipos")
+# graphTacos(carnes, "Carnes")
 
 thread_ingredientes = Thread(target=rellenarIngredientes, args=[1])
 thread_ingredientes.start()
@@ -40,7 +39,7 @@ thread_taquero3 = Thread(target=taquero1, args=[queue_cabeza_suadero_veggie])
 thread_taquero3.start()
 
 while True:
-    time.sleep(100)
+    time.sleep(10)
     listaOrdenes.extend(readSQS())
     print(listaOrdenes)
     print(ingredientes)
