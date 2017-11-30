@@ -129,10 +129,10 @@ And that's it, now you can see how the real time graphs of the project interact.
 ## Diagrams
 
 First Diagram:
-[Taquero_Diagram](https://github.com/VictorPeralta/OSProject/blob/master/extra/Taquero_Diagram.png)
+[Taquero Diagram](https://github.com/VictorPeralta/OSProject/blob/master/extra/Taquero_Diagram.png)
 
 Second Diagram:
-[Mesero_Diagram.png](https://github.com/VictorPeralta/OSProject/blob/master/extra/Mesero_Diagram.png)
+[Mesero Diagram](https://github.com/VictorPeralta/OSProject/blob/master/extra/Mesero_Diagram.png)
 
 
 ## Contributing
