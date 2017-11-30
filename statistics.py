@@ -75,6 +75,21 @@ def obtainTacosByMeat(listaOrdenes, cantidadPorCarne):
             cantidadPorCarne[currentMeat] += subordenes[i]["quantity"]
     return cantidadPorCarne
 
+def obtainOrdenesBySize(listaOrdenes, cantidadPorTamano):
+    for k, v in cantidadPorTamano.items():
+        cantidadPorTamano[k] = 0
+    for orden in listaOrdenes:
+        total_tacos = 0
+        subordenes = orden["orden"]
+        for i in range(len(subordenes)):
+            total_tacos += subordenes[i]["quantity"]
+        if total_tacos < 6:
+            cantidadPorTamano["Pequeno"] += 1
+        elif total_tacos < 15:
+            cantidadPorTamano["Mediano"] += 1
+        else:
+            cantidadPorTamano["Grande"] += 1
+
 #Function to send directly a dictionary as a list of labels and values
 def graphTacos(diccionario, titulo):
     graphBars(list(diccionario.keys()), list(diccionario.values()), titulo)
