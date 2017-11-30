@@ -61,11 +61,10 @@ thread_update = Thread(target=updateGraphDictionaries, args=[distributed_orders,
 thread_update.start()
 
 while True:
-    #time.sleep(20)
    # print("DISTRIBUTED", distributed_orders)
     #print("TACOS", tipos)
     #print("CARNES", carnes)
-    time.sleep(50)
+    time.sleep(10)
     listaOrdenes.extend(readSQS())
     print(listaOrdenes)
     print(ingredientes)
