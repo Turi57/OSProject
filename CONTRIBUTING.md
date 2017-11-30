@@ -17,4 +17,4 @@ Please note we have a code of conduct, please follow it in all your interactions
    do not have permission to do that, you may request the second reviewer to merge it for you.
 
 ## Code of Conduct
-Please read [CODE_OF_CONDUCT.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CODE_OF_CONDUCT.md](https://github.com/VictorPeralta/OSProject/blob/master/CODE_OF_CONDUCT.md) for details on our code of conduct, and the process for submitting pull requests to us.
