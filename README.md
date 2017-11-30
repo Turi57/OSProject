@@ -128,7 +128,7 @@ And that's it, now you can see how the real time graphs of the project interact.
 
 ## Diagrams
 
-Mesero Diagram (https://github.com/VictorPeralta/OSProject/blob/master/extra/RRS.png)
+Mesero Diagram [extra/RRS.png](https://github.com/VictorPeralta/OSProject/blob/master/extra/RRS.png)
 
 ## Contributing
 
