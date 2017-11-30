@@ -3,11 +3,9 @@ import queue
 import threading
 from SQS import *
 
-ingredientes = {"Guacamole":500, "Cebolla":500, "Cilantro":500, "Frijoles":500, "Salsa":500}
-responseTimes = {"Pequeño":[], "Mediano":[], "Grande":[]}
-tortillas_asada_tripa = 500
-tortillas_adobada_lengua = 500
-tortillas_cabeza_suadero_veggie = 500
+ingredientes = {"Guacamole": 500, "Cebolla": 500, "Cilantro": 500, "Frijoles": 500, "Salsa": 500}
+responseTimes = {"Pequeño": [], "Mediano": [], "Grande": []}
+tortillas = [500, 500, 500]
 
 # Global queues
 queue_asada_tripa = queue.Queue()
@@ -21,12 +19,17 @@ distributed_orders = {}
 # Thread resource lock
 lock = threading.Lock()
 
+
 def rellenarIngredientes(tiempo):
     while True:
         time.sleep(tiempo)
-        lock.acquire() #ACQUIRE LOCK
+        lock.acquire()
         ingredientes[min(ingredientes, key=ingredientes.get)] += 50
-        lock.release() #RELEASE LOCK
+        tortillas[0] += 50
+        tortillas[1] += 50
+        tortillas[2] += 50
+        lock.release()
+
 
 def mesero(listaOrdenes):
     """Takes orders and submits them to appropriate queue"""
@@ -37,12 +40,10 @@ def mesero(listaOrdenes):
             orden = listaOrdenes.pop(0)
             distributed_orders[orden["request_id"]] = orden
 
-
             orders_in_progress[orden["request_id"]] = {
-                "size":len(orden["orden"]),
+                "size": len(orden["orden"]),
                 "start_time": orden["datetime"],
                 "steps": [],
-                "start_time":orden["datetime"],
             }
 
             for suborder in orden["orden"]:
@@ -58,7 +59,6 @@ def mesero(listaOrdenes):
                     queue_adobada_lengua.put(suborder)
                 else:
                     queue_cabeza_suadero_veggie.put(suborder)
-
 
         time.sleep(1)
 
@@ -80,23 +80,40 @@ def processOrder(order):
     addStep(order, 1)
     meat_type = order["meat"]
     for ingrediente in order["ingredients"]:
-
-        if(ingredientes[ingrediente] < tacos_made):
+        if ingredientes[ingrediente] < tacos_made:
             if meat_type == "Asada" or meat_type == "Tripa":
-                if tortillas_asada_tripa < 500:
-
+                if tortillas[0] < tacos_made:
+                    addStep(order, 3)
+                    return [order, False]
             elif meat_type == "Adobada" or meat_type == "Lengua":
-                queue_adobada_lengua.put(suborder)
+                if tortillas[1] < tacos_made:
+                    addStep(order, 3)
+                    return [order, False]
             else:
-                queue_cabeza_suadero_veggie.put(suborder)
+                if tortillas[2] < tacos_made:
+                    addStep(order, 3)
+                    return [order, False]
             addStep(order, 3)
             return [order, False]  # Skips order, next one might not use the missing ingredient, minimizing downtime
 
+    if meat_type == "Asada" or meat_type == "Tripa":
+        lock.acquire()
+        tortillas[0] -= tacos_made
+        lock.release()
+    elif meat_type == "Adobada" or meat_type == "Lengua":
+        lock.acquire()
+        tortillas[1] -= tacos_made
+        lock.release()
+    else:
+        lock.acquire()
+        tortillas[2] -= tacos_made
+        lock.release()
+
     for ingrediente in order["ingredients"]:
-        lock.acquire() #LOCK ACQUIRE
-        ingredientes[ingrediente] -= tacos_made # Use up 1 unit per taco
-        lock.release() #LOCK RELEASE
-    if orders_in_progress[order_id][suborder_id]["quantity"] > 0: # Remove tacos from order
+        lock.acquire()
+        ingredientes[ingrediente] -= tacos_made  # Use up 1 unit per taco
+        lock.release()
+    if orders_in_progress[order_id][suborder_id]["quantity"] > 0:  # Remove tacos from order
         if orders_in_progress[order_id][suborder_id]["quantity"] < tacos_made:
             orders_in_progress[order_id][suborder_id]["quantity"] = 0
         else:
@@ -107,23 +124,21 @@ def processOrder(order):
         addStep(order, 4)
         print(orders_in_progress)
         order_id = order["part_id"][:36]
-        lock.acquire() #ACQUIRE LOCK
+        lock.acquire()
         orders_in_progress[order_id]["size"] -= 1
-        lock.release() #RELEASE LOCK
+        lock.release()
 
         if orders_in_progress[order_id]["size"] == 0:
             # Delete the order from SQS using the receipt handle
             receipt = distributed_orders[order_id]["ReceiptHandle"]
             distributed_orders[order_id]["ReceiptHandle"] = "Deleted"
-            #deleteSQS(receipt)
+            # deleteSQS(receipt)
             print("DELETE", receipt)
 
-
-            # Send response to SQS
             sendResponse(order)
-            lock.acquire() #ACQUIRE LOCK
+            lock.acquire()
             orders_in_progress.pop(order_id)
-            lock.release() #RELEASE LOCK
+            lock.release()
         return [order, True]
 
     addStep(order, 2)
@@ -146,17 +161,17 @@ def addStep(order, state):
 
     order_id = order["part_id"][:36]
     suborder_id = order["part_id"]
-    lock.acquire() #ACQUIRE LOCK
+    lock.acquire()
     next_step = len(orders_in_progress[order_id]["steps"]) + 1
     now = time.strftime("%Y-%m-%d %H:%M:%S")
     orders_in_progress[order_id]["steps"].append({
-        "step":next_step,
-        "state":current_state[0],
-        "action":current_state[1],
-        "part_id":suborder_id,
+        "step": next_step,
+        "state": current_state[0],
+        "action": current_state[1],
+        "part_id": suborder_id,
         "startTime": now
     })
-    lock.release() #RELEASE LOCK
+    lock.release()
     if next_step > 1:
         orders_in_progress[order_id]["steps"][next_step-2].update({"endTime":now})
     if state == 4:
